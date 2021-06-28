@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+  crossorigin="anonymous" />
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="shortcut icon" type="image/icon" href="static/img/favicon.ico" />
+  {% block link %}{% endblock link %}
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <div id="progressbar"></div>
+    <div id="dark_slider">
+      <div class="dark-btn"></div>
+      <div id="slider-check">
+        <div id="nav-bars"></div>
+      </div>
+    </div>
+  </nav>
+  <div class="slider">
+      <div class="dark-btn"></div>
+      <div id="nav-cross">
+        <i class="fas fa-times"></i>
+      </div>
+    <ul id ="slider-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li style="display : {{login_dis}}"><button id="myBtn"><a href="#">Login</a></button></li>
+      <li style="display : {{logout_dis}}"><a href="/editData" target="_blank">Edit Data</a></li>
+      <li style="display : {{logout_dis}}"><a href="/handlelogout">Logout</a></li>
+    </ul>
+    <div class="side-footer">
+      <div class="icons">
+        <a href="{{facebook_link}}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="{{google_link}}" target="_blank"><i class="fab fa-google"></i></a>
+        <a href="{{instagram_link}}" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="{{twitter_link}}" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+      <h5>&copy; Copyright Notes.io, <br> All rights are reserved. </h5>
+    </div>
+  </div>
+  
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form action="/handlelogin/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="text" name="username" id="username" placeholder="Username" required>
+      <input type="text" name="password" id="password" placeholder="Password" required>
+      <button type="submit">Log In</button>
+      </form>
+    </div>
+  </div>
+
+    <section>
+      {% block body %}
+      
+      {% endblock body %}
+    </section>
+  <script src="/static/js/base.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body{
+    font-family: 'Poppins';
+}
+h2{
+    text-align: center;
+}
+.infocard{
+    display: inline-block;
+    border: 5px solid rgba(4, 187, 4, 0.322);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 30px;
+}
+.infocard img{
+    box-shadow: 0px 3px 10px rgb(177, 177, 177);
+}

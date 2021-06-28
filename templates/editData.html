@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/editData.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<style>
+    table {
+        border-spacing: 0px;
+        table-layout: fixed;
+        margin: auto;
+    }
+
+    th {
+        color: rgb(25, 133, 25);
+        border: 1px solid black;
+    }
+
+    td {
+        border: 1px solid black;
+        word-break: break-all;
+        padding: 5px;
+    }
+
+    td .del {
+        padding: 5px;
+        margin: 12px;
+
+    }
+</style>
+
+<body>
+    <h2>Add Data in Database</h2>
+    <div class="form">
+        <h3>Plant details</h3>
+        <form id="add" action="/editData/" method="POST">
+            {% csrf_token %}
+            <label for="name">Name :</label>
+            <input type="text" name="name" id="name" required>
+            <label for="place">Place : </label>
+            <input type="text" name="place" id="place" required>
+            <label for="discription">Discription :</label>
+            <textarea name="discription" id="discription" cols="30" rows="10" required></textarea> <label for="image">Image :
+            </label>
+            <input type="file" name="image" id="image" required>
+            <button type="submit">Submit Now</button>
+        </form>
+    </div>
+    <div class="preview-table">
+        <table width="95%">
+            <tr>
+                <th>Name</th>
+                <th>Place</th>
+                <th>Discription</th>
+                <th>Image</th>
+                <th width="50px">Del</th>
+            </tr>
+            {% for data in datas %}
+            <tr>
+                <td>{{data.name}}</td>
+                <td>{{data.place}}</td>
+                <td>{{data.disc|slice:":80"}}</td>
+                <td>{{data.image}}</td>
+                <td><a href="{% url 'deletedata' data.name %}"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+            {% endfor %}
+
+
+    </div>
+    
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+</body>
+
+</html>
