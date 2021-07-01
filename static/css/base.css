@@ -30,12 +30,13 @@ body{
 .slider {
     position: fixed;
     top: 0;
-    left: -500px;
+    left: -600px;
     width: 250px;
     height: 100%;
     background-color: #fff;
     transition: all .4s;
     border-right: 2px solid rgba(53, 173, 53, 0.705);
+    z-index: 3;
 }
 
 .dark .slider {
@@ -178,25 +179,18 @@ body{
     font-weight: 600;
 }
 
-#dark_slider{
+#dark-btn {
     position: fixed;
-    top: 20px;
-    left: 6px;
-    width: 70px;
-    height: 26px;
-    backdrop-filter: blur(25px);
-    border-radius: 20px;
-}
-.dark-btn {
-    position: absolute;
-    top: 2px;
-    left: 5px;
+    top: 23px;
+    left: 15px;
     width: 22px;
     height: 22px;
     background: rgb(0, 202, 34);
     border-radius: 50%;
+    cursor: pointer;
+    z-index: 5;
 }
-.dark-btn::before {
+#dark-btn::before {
     font-family: "Font Awesome 5 Free";
     content: '\f186';
     position: relative;
@@ -204,18 +198,31 @@ body{
     left: 3px;
     font-weight: 900;
 }
+
+#dark_slider{
+    position: fixed;
+    top: 20px;
+    left: 9px;
+    width: 70px;
+    height: 28px;
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    z-index: 2;
+}
 .slider .dark-btn{
     left: 10px;
     top: 21px;
 }
 #slider-check{
-    position: absolute;
+    position: fixed;
     width: 29px;
     height: 20px;
-    top: 3px;
-    left: 35px;
+    top: 25px;
+    left: 45px;
     cursor: pointer;
+    z-index: 3;
 }
+
 #nav-bars {
     position: absolute;
     cursor: pointer;
@@ -225,6 +232,7 @@ body{
     height: 4px;
     background-color: black;
     border-radius: 20px;
+    transition: all 0.5s;
 }
 
 #nav-bars::before {
@@ -237,6 +245,7 @@ body{
     height: 4px;
     background-color: black;
     border-radius: 20px;
+    transition: all 0.5s;
 }
 
 #nav-bars::after {
@@ -249,6 +258,12 @@ body{
     height: 4px;
     background-color: black;
     border-radius: 20px;
+    transition: all 0.5s;
+}
+.dark #nav-bars::before,
+.dark #nav-bars::after,
+.dark #nav-bars{
+    background: white;
 }
 
 /* The Modal (background) */
@@ -321,3 +336,92 @@ body{
     border-radius: 5px;
 }
 
+section {
+    transition: all .4s;
+}
+footer {
+    margin: -21px 0;
+    padding: 0;
+    text-align: center;
+}
+
+.dark footer {
+    background: #0c421e;
+}
+
+.footer-icons {
+    text-align: center;
+}
+
+.footer-icons ul {
+    position: relative;
+    display: flex;
+    z-index: 2;
+    justify-content: center;
+}
+
+.footer-icons ul li {
+    position: relative;
+    list-style: none;
+    margin: 10px;
+}
+
+.footer-icons ul li a {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.footer-icons ul li a:hover {
+    transform: translateY(-10px);
+}
+
+.dark .footer-icons ul li a {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.dark .footer-icons ul li a::before {
+    background: white;
+}
+
+.footer-icons ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 40px;
+    background: black;
+    transform: skewX(45deg) translateX(50px);
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.footer-icons a:hover::before {
+    transform: skewX(45deg) translateX(-30px);
+}
+
+footer h4 {
+    background: #6dad69;
+}
+
+.dark footer h4 {
+    background: #033500;
+}

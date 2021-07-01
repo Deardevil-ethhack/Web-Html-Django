@@ -1,4 +1,88 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block link %}
+  <link rel="stylesheet" href="/static/css/style.css">
+{% endblock link  %}
+
+{% block address_links %}
+      <li><a href="/#">Home</a></li>
+      <li><a href="/#about">About Us</a></li>
+      <li><a href="/#contact">Contact Us</a></li>
+      <li style="display : {{login_dis}}"><button id="myBtn"><a href="#">Login</a></button></li>
+      <li style="display : {{logout_dis}}"><a href="/editData" target="_blank">Edit Data</a></li>
+      <li style="display : {{logout_dis}}"><a href="/handlelogout">Logout</a></li>
+{% endblock address_links %}
+{% block body %}
+      {% if messages %}
+    <div class="login-error">
+        {% for message in messages %}
+          <h4{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+          <span class="close">&times;</span>
+        {% endfor %}
+    </div>
+      {% endif %}
+
+
+    <div id="home">
+      <h2>{{site_name}}</h2>
+      <a href="/database">DataBase</a>
+      <div class="info">
+        <h3>{{home_para_heading}}</h3>
+        <p>{{home_para}}</p>
+      </div>
+    </div>
+    <div id="about">
+      <h2>About Us</h2>
+      <div class="card">
+        <p class="side-para"><span class="name-heading">{{about_para_heading}}</span>
+          {{about_para}}
+        </p>
+        <div class="img"></div>
+      </div>
+    </div> 
+    <div id="contact">
+      <div class="heading">
+        <h2>Contact Us</h2>
+      </div>
+
+      <div class="form">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <input type="text" name="name" id="name" required>
+          <span id="lname">Name</span>
+          <label for="class">Class : </label>
+          <select id="class">
+            <option value="1st">1st</option>
+            <option value="2nd">2nd</option>
+            <option value="3rd">3rd</option>
+            <option value="4th">4th</option>
+            <option value="5th">5th</option>
+            <option value="6th">6th</option>
+            <option value="7th">7th</option>
+            <option value="8th">8th</option>
+            <option value="9th">9th</option>
+            <option value="10th">10th</option>
+            <option value="11th">11th</option>
+            <option value="12th">12th</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Other">Other</option>
+          </select>
+          <textarea name="message" id="message" cols="53" rows="9" required></textarea>
+          <span id="lmessage">Message</span>
+          <button type="submit" id="submit">Submit</button>
+        </form>
+      </div>
+      <div class="info">
+        <h4>Support links</h4>
+        <ul>
+          <li><i class="fas fa-tty"></i> &nbsp;tel: {{contact_telephone}}</li>
+          <li><i class="fas fa-phone-alt"></i> &nbsp;Phone: {{contact_number}}</li>
+          <li><i class="fas fa-map-marker-alt"></i> &nbsp;Add: {{contact_address}}</li>
+        </ul>
+      </div>
+    </div> 
+{% endblock body %} 
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -141,4 +225,4 @@
   <script src="static/js/index.js"></script>
 </body>
 
-</html>
+</html> {% endcomment %}

@@ -31,7 +31,7 @@ body{
 .info .value h2{
     word-wrap: break-word;
 }
-a{
+.card a{
     position: relative;
     text-align: center;
     display: flex;

@@ -1,7 +1,5 @@
-from typing import ContextManager
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import AddData
 import os
@@ -19,29 +17,24 @@ def index(request):
     if request.user.is_authenticated:
         context.update({'logout_dis': 'inline-block'})
         context.update({'login_dis': 'none'})
-        print("yes")
     else:
         context.update({'login_dis': 'inline-block'})
         context.update({'logout_dis': 'none'})
-        # context.update({'logout_btn': 'none'})
-        # context.update({'logoin_btn': 'inline-block'})
-        print("no")
+    context.update({'site_title': context['title']})
 
     return render(request, 'index.html', context)
 
 def handlelogin(request):
-
-    if request.method == 'POST':
-        user = request.POST.get('username')
-        passw = request.POST.get('password')
-        user = authenticate(username=user, password=passw)
-        if user is not None:
-            login(request, user)
-            return redirect("/")
-        else:
-            messages.success(request, 'You are not a user')
-
-    return redirect("/")
+  if request.method == 'POST':
+      user = request.POST.get('username')
+      passw = request.POST.get('password')
+      user = authenticate(username=user, password=passw)
+      if user is not None:
+          login(request, user)
+          return redirect("/")
+      else:
+          messages.error(request, 'You are not a user')
+  return redirect("/")
 
 
 def handlelogout(request):
@@ -49,13 +42,21 @@ def handlelogout(request):
     return redirect("/")
 
 def database(request):
-  data_context = {
-      'datas': AddData.objects.all(),
-  }
+  if request.user.is_authenticated:
+    context.update({'logout_dis': 'inline-block'})
+    context.update({'login_dis': 'none'})
+  else:
+    context.update({'login_dis': 'inline-block'})
+    context.update({'logout_dis': 'none'})
+
+  context.update({'site_title': context['title']+' | Database'})
+  context.update({'datas': AddData.objects.all()})
     
-  return render(request, 'database.html', data_context)
+  return render(request, 'database.html', context)
 
 def editData(request):
+
+  context.update({'site_title': context['title']+' | Edit Data'})
   if request.user.is_authenticated:
     if request.method == 'POST':
       name = request.POST.get('name')
@@ -70,10 +71,8 @@ def editData(request):
         image = image
         )
       data.save()
-    editpage_context = {
-      'datas': AddData.objects.all()
-    }
-    return render(request, 'editData.html', editpage_context)
+    context.update({'datas': AddData.objects.all()})
+    return render(request, 'editData.html', context)
   else:
     return redirect('error')
 
